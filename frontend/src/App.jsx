@@ -6,8 +6,9 @@ const RecipeKeeper   = lazy(() => import('./components/RecipeKeeper'));
 const GPSTracker     = lazy(() => import('./components/GPSTracker'));
 const MedicineLogger = lazy(() => import('./components/MedicineLogger'));
 const WaterTracker   = lazy(() => import('./components/WaterTracker'));
+const ChatBot        = lazy(() => import('./components/ChatBot'));
 
-const VIEWS = { home: 'home', recipe: 'recipe', gps: 'gps', medicine: 'medicine', water: 'water' };
+const VIEWS = { home: 'home', recipe: 'recipe', gps: 'gps', medicine: 'medicine', water: 'water', bot: 'bot' };
 
 function Dashboard({ onNavigate }) {
   return (
@@ -18,6 +19,14 @@ function Dashboard({ onNavigate }) {
       </header>
 
       <div className="dashboard-grid" role="navigation" aria-label="Main Navigation">
+        <button className="feature-card card-chatbot" aria-label="Open AI Helper Bot" onClick={() => onNavigate(VIEWS.bot)}>
+          <div className="card-icon" aria-hidden="true"><Bot size={40} color="#9B5DE5" /></div>
+          <div className="card-content">
+            <h2>AI Helper</h2>
+            <p>Chat with Me</p>
+          </div>
+        </button>
+
         <button className="feature-card card-recipe" aria-label="Open Recipe Keeper" onClick={() => onNavigate(VIEWS.recipe)}>
           <div className="card-icon" aria-hidden="true"><BookOpen size={40} color="#FF6B6B" /></div>
           <div className="card-content">
@@ -78,6 +87,7 @@ function App() {
         if (transcript.includes('location') || transcript.includes('gps')) setView(VIEWS.gps);
         if (transcript.includes('medicine') || transcript.includes('pill')) setView(VIEWS.medicine);
         if (transcript.includes('water'))   setView(VIEWS.water);
+        if (transcript.includes('bot') || transcript.includes('help') || transcript.includes('chat')) setView(VIEWS.bot);
         if (transcript.includes('home') || transcript.includes('back')) setView(VIEWS.home);
         setIsListening(false);
       };
@@ -99,6 +109,7 @@ function App() {
           {view === VIEWS.gps      && <GPSTracker      onBack={() => setView(VIEWS.home)} />}
           {view === VIEWS.medicine && <MedicineLogger  onBack={() => setView(VIEWS.home)} />}
           {view === VIEWS.water    && <WaterTracker    onBack={() => setView(VIEWS.home)} />}
+          {view === VIEWS.bot      && <ChatBot         onBack={() => setView(VIEWS.home)} />}
         </Suspense>
 
         <button
