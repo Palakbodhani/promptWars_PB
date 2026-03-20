@@ -9,33 +9,18 @@ export const AppProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
   const [waterLog, setWaterLog] = useState(0);
 
-  const loginUser = (userData) => {
-    // Stub for Firebase Auth
-    setUser(userData);
-  };
-
-  const logoutUser = () => {
-    setUser(null);
-  };
-
-  const trackWater = () => {
-    setWaterLog((prev) => prev + 1);
-  };
+  const loginUser = (userData) => setUser(userData);
+  const logoutUser = () => setUser(null);
+  const trackWater = () => setWaterLog((prev) => Math.min(prev + 1, 8));
 
   return (
     <AppContext.Provider
       value={{
-        user,
-        loginUser,
-        logoutUser,
-        userLocation,
-        setUserLocation,
-        medicines,
-        setMedicines,
-        recipes,
-        setRecipes,
-        waterLog,
-        trackWater,
+        user, loginUser, logoutUser,
+        userLocation, setUserLocation,
+        medicines, setMedicines,
+        recipes, setRecipes,
+        waterLog, setWaterLog, trackWater,
       }}
     >
       {children}
@@ -43,6 +28,4 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+export const useAppContext = () => useContext(AppContext);
