@@ -1,0 +1,176 @@
+:root {
+  --primary: #FF6B6B; /* Vibrant Red/Pink */
+  --secondary: #4ECDC4; /* Bright Teal */
+  --accent: #FFE66D; /* Sunny Yellow */
+  --purple: #9B5DE5; /* Fun Purple */
+  --bg-color: #F7F9FC;
+  --text-dark: #1A1A24;
+  --text-light: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-dark);
+  font-size: 26px; /* MANDATORY 24px+ */
+  line-height: 1.5;
+  background-image: radial-gradient(circle at 10% 20%, rgba(255, 107, 107, 0.1) 0%, transparent 20%),
+                    radial-gradient(circle at 90% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 20%);
+  background-attachment: fixed;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 28px;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  flex: 1;
+}
+
+/* Feature Cards (Buttons) */
+.feature-card {
+  display: flex;
+  align-items: center;
+  padding: 30px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover, .feature-card:focus {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  outline: 4px solid var(--text-dark);
+  outline-offset: 4px;
+}
+
+.feature-card:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card-content h2 {
+  font-size: 32px;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+
+.card-content p {
+  font-size: 24px;
+  color: #333;
+  opacity: 0.9;
+}
+
+/* Specific Card Colors */
+.card-recipe {
+  background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
+}
+.card-gps {
+  background: linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%);
+}
+.card-medicine {
+  background: linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%);
+}
+.card-water {
+  background: linear-gradient(135deg, #E0C3FC 0%, #8EC5FC 100%);
+}
+
+/* Voice Command Button */
+.voice-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  z-index: 100;
+}
+
+.voice-fab:hover, .voice-fab:focus {
+  transform: scale(1.1) rotate(5deg);
+  outline: 4px solid var(--text-dark);
+}
+
+.voice-fab.active {
+  animation: pulse 1.5s infinite;
+  background: var(--secondary);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.7); }
+  70% { box-shadow: 0 0 0 25px rgba(78, 205, 196, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(78, 205, 196, 0); }
+}
+
+/* Accessibility */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 4px solid var(--text-dark);
+  outline-offset: 4px;
+}
